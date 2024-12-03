@@ -1,3 +1,20 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "lib": [
+      "ES2020",
+      "ES2015.Generator",
+      "ES2015.Iterable",
+      "WebWorker.ImportScripts"
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@/tailwind.config.ts": [
+        "./tailwind.config.ts"
+      ]
+    }
+  },
 }
