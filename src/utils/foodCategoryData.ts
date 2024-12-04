@@ -1,4 +1,6 @@
-export const foodCategoryData = [
+import {FoodCategoryType} from '../types/Recipe';
+
+export const foodCategoryData: FoodCategoryType[] = [
   {
     id: 1,
     name: 'Lunch',

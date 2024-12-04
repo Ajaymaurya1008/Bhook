@@ -4,12 +4,12 @@ export type FoodItemType = {
   image: string;
   ingredients: string[];
   caloriesPerServing: number;
-  rating: number;
+  rating?: number;
 };
 
-export type SpecialFoodItemRequestType = {
-  recipes: FoodItemType[];
-  total: number;
-  skip: number;
-  limit: number;
+
+export type FoodCategoryType = {
+  id: number;
+  name: string;
+  icon: string;
 };

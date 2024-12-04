@@ -3,9 +3,9 @@ import {SpecialFoodItemRequestType} from '../types/Request';
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 
-export const useSpecialFood = () => {
+export const useFood = () => {
   const getSpecialRecipes = async (): Promise<SpecialFoodItemRequestType> => {
-    const res = await axios.get('https://dummyjson.com/recipes?limit=10');
+    const res = await axios.get('https://dummyjson.com/recipes?limit=50');
     return res.data;
   };
 
