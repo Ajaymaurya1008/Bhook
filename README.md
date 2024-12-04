@@ -1,79 +1,165 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Bhook - Food Delivery App
 
-# Getting Started
+## Overview
+Bhook is a modern food delivery application built with React Native, offering a seamless experience for browsing and ordering food items. The app features a clean UI with bottom tab navigation, authentication system, and infinite scroll functionality.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Features
 
-## Step 1: Start the Metro Server
+- **Authentication System**
+  - Login functionality with username/password
+  - Session management using Zustand
+  - Form validation with error messages
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- **Home Screen**
+  - Personalized greeting with user's name
+  - Search bar for quick access
+  - Food categories with icons
+  - Special offers section with horizontal scrolling
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- **Search Screen**
+  - Infinite scroll implementation
+  - Search header with search functionality
+  - Grid layout for food items
+  - Loading states and error handling
 
+- **Navigation**
+  - Bottom tab navigation with 4 main sections:
+    - Home
+    - Favorites
+    - Search
+    - Profile
+  - Stack navigation for authentication flow
+
+## Tech Stack
+
+### Core
+- React Native 0.76.3
+- TypeScript
+- NativeWind (TailwindCSS for React Native)
+
+### State Management & Data Fetching
+- Zustand for state management
+- TanStack Query (React Query) for API calls
+- Axios for HTTP requests
+
+### UI Components
+- React Native Vector Icons
+- @shopify/flash-list for optimized lists
+- React Native Reanimated for animations
+- React Native Keyboard Controller
+
+### Navigation
+- React Navigation v7
+  - Bottom Tabs
+  - Native Stack
+
+### Storage
+- React Native MMKV for local storage
+
+## Prerequisites
+
+- Node.js >= 18
+- Ruby >= 2.6.10
+- Xcode (for iOS)
+- Android Studio (for Android)
+- CocoaPods (for iOS)
+
+## Installation
+
+1. Clone the repository
 ```bash
-# using npm
+git clone <repository-url>
+cd Bhook
+```
+
+2. Install dependencies
+```bash
+npm install
+```
+
+3. iOS specific setup
+```bash
+cd ios
+pod install
+cd ..
+```
+
+4. Start the Metro bundler
+```bash
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
+5. Run the app
 ```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
+# For iOS
 npm run ios
 
-# OR using Yarn
-yarn ios
+# For Android
+npm run android
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+## Project Structure
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+```
+src/
+├── assets/
+├── components/
+├── hooks/
+├── navigation/
+├── screens/
+├── store/
+├── style/
+├── types/
+└── utils/
+```
 
-## Step 3: Modifying your App
+## Design Decisions & Approach
 
-Now that you have successfully run the app, let's modify it.
+1. **API Adaptation**
+   - Used calories as price since the dummy API didn't provide price information
+   - Implemented infinite scroll for better performance with large datasets
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+2. **UI/UX**
+   - Used NativeWind for consistent styling and better development experience
+   - Implemented loading states and error boundaries for better user experience
+   - Used FlashList instead of FlatList for better performance
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+3. **State Management**
+   - Zustand for simple global state management (auth)
+   - React Query for server state management
+   - MMKV for persistent storage
 
-## Congratulations! :tada:
+4. **Type Safety**
+   - Comprehensive TypeScript implementation
+   - Defined interfaces for API responses and component props
 
-You've successfully run and modified your React Native App. :partying_face:
+## Challenges & Solutions
 
-### Now what?
+1. **Performance Optimization**
+   - Challenge: Rendering large lists of food items
+   - Solution: Implemented FlashList with proper estimation of item sizes
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+2. **State Management**
+   - Challenge: Managing auth state across app restart
+   - Solution: Implemented persistent storage with MMKV
 
-# Troubleshooting
+3. **API Integration**
+   - Challenge: Limited API data (no prices)
+   - Solution: Creatively used calories as price placeholder
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+4. **Form Handling**
+   - Challenge: Form validation and keyboard handling
+   - Solution: Implemented custom validation and used React Native Keyboard Controller
 
-# Learn More
+## Future Improvements
 
-To learn more about React Native, take a look at the following resources:
+1. Implement search functionality
+2. Add favorites functionality
+3. Complete profile section
+4. Add cart functionality
+6. Add unit tests and E2E tests
+7. Implement proper error boundaries
+8. Add proper API integration
+9. Add proper authentication
+10. Add proper validation
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.

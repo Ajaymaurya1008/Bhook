@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unstable-nested-components */
 import {ActivityIndicator, View, Text} from 'react-native';
-import React from 'react';
-import Header from '../components/Header';
+import React, {useCallback, useMemo} from 'react';
+import Header from '../components/search/Header';
 import {FlashList} from '@shopify/flash-list';
 import {FoodItemType} from '@/types/Recipe';
-import FoodCard from '../components/FoodCard';
+import FoodCard from '../components/search/FoodCard';
 import {useFood} from '../hooks/useFood';
 import colors from 'tailwindcss/colors';
 
@@ -18,13 +18,16 @@ export default function Search() {
     error,
   } = useFood();
 
-  const recipeData = infiniteData?.pages.flatMap(page => page.recipes);
+  const recipeData = useMemo(
+    () => infiniteData?.pages.flatMap(page => page.recipes),
+    [infiniteData?.pages],
+  );
 
-  const handleEndReached = () => {
+  const handleEndReached = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  };
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   if (isLoading) {
     return (

@@ -1,11 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text, TextInput, ToastAndroid, Image} from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {users} from '../utils/users';
 import {navigate} from '../navigation/NavigationService';
 import {useAuthStore} from '../store/authStore/store';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-controller';
-import LoginButtons from '../components/LoginButtons';
+import LoginButtons from '../components/auth/LoginButtons';
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -14,12 +14,11 @@ export default function Login() {
   });
   const {setSessionToken} = useAuthStore();
 
-  const handleChange = (name: string, value: string) => {
-    setUser({...user, [name]: value});
-  };
+  const handleChange = useCallback((name: string, value: string) => {
+    setUser(prev => ({...prev, [name]: value}));
+  }, []);
 
-  const handleLogin = () => {
-    console.log(user);
+  const handleLogin = useCallback(() => {
     const username = user.Username.trim();
     const password = user.Password.trim();
     if (!username || !password) {
@@ -41,10 +40,9 @@ export default function Login() {
       ToastAndroid.show('Incorrect Password', ToastAndroid.SHORT);
       return;
     }
-    // store name to mimic login
     setSessionToken(isValidUser.FirstName);
     navigate('TabNavigator');
-  };
+  }, [user, setSessionToken]);
 
   return (
     <KeyboardAwareScrollView contentContainerClassName="flex-1 bg-neutral-100 items-center justify-center px-4">

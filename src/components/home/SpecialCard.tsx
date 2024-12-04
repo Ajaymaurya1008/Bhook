@@ -1,9 +1,9 @@
 import {View, Text, Image} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { FoodItemType } from '@/types/Recipe';
+import {FoodItemType} from '@/types/Recipe';
 
-export default function SpecialCard(props: FoodItemType) {
+export default memo(function SpecialCard(props: FoodItemType) {
   const {name, image, ingredients, caloriesPerServing, rating} = props;
   return (
     <View className="bg-white rounded-b-lg w-60 mt-4">
@@ -28,4 +28,4 @@ export default function SpecialCard(props: FoodItemType) {
       </View>
     </View>
   );
-}
+});

@@ -6,10 +6,10 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useCallback} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
-import FoodCategory from '../components/FoodCategory';
-import SpecialCard from '../components/SpecialCard';
+import FoodCategory from '../components/home/FoodCategory';
+import SpecialCard from '../components/home/SpecialCard';
 import colors from 'tailwindcss/colors';
 import {FlashList} from '@shopify/flash-list';
 import {FoodItemType} from '../types/Recipe';
@@ -20,6 +20,10 @@ import {useAuthStore} from '../store/authStore/store';
 export default function Home() {
   const {data, isLoading, error} = useSpecialFood();
   const {sessionToken: name} = useAuthStore();
+
+  const handleTotal = useCallback(() => {
+    navigate('Search');
+  }, []);
 
   if (isLoading) {
     return (
@@ -36,10 +40,6 @@ export default function Home() {
       </View>
     );
   }
-
-  const handleTotal = () => {
-    navigate('Search');
-  };
 
   return (
     <ScrollView contentContainerClassName="bg-neutral-100 px-6 pt-16 pb-20">

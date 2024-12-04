@@ -1,7 +1,7 @@
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { foodCategoryData } from '../utils/foodCategoryData';
+import { foodCategoryData } from '../../utils/foodCategoryData';
 
 export default function FoodCategory() {
   return (
