@@ -1,14 +1,11 @@
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ToastAndroid,
-} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {View, Text, TextInput, ToastAndroid, Image} from 'react-native';
 import React, {useState} from 'react';
 import {users} from '../utils/users';
 import {navigate} from '../navigation/NavigationService';
 import {useAuthStore} from '../store/authStore/store';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-controller';
+import LoginButtons from '../components/LoginButtons';
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -50,8 +47,17 @@ export default function Login() {
   };
 
   return (
-    <View className="flex-1 bg-neutral-100 items-center justify-center px-4">
-      <View className="gap-2">
+    <KeyboardAwareScrollView contentContainerClassName="flex-1 bg-neutral-100 items-center justify-center px-4">
+      <View className="w-full">
+        <Image
+          source={require('../assets/images/welcome.png')}
+          style={{
+            width: '100%',
+            height: 150,
+          }}
+        />
+      </View>
+      <View className="gap-2 mt-4">
         <Text className="text-center text-4xl font-bold">Welcome Back</Text>
         <Text className="text-center font-normal">
           Login to your existant account
@@ -75,30 +81,7 @@ export default function Login() {
       <Text className="mt-4 text-sm font-semibold text-orange-500 text-right px-8 w-full">
         Forgot password?
       </Text>
-      <TouchableOpacity
-        onPress={handleLogin}
-        className="py-3 px-10 bg-orange-500 justify-center items-center rounded-xl mt-4">
-        <Text className="text-white text-center font-medium text-xl">
-          LOG IN
-        </Text>
-      </TouchableOpacity>
-      <Text className="mt-4">or connect using</Text>
-      <View className="flex-row gap-4">
-        <TouchableOpacity className="py-2 px-4 justify-center items-center bg-orange-500 rounded-md mt-4">
-          <Text className="text-white text-center font-medium text-base">
-            Google
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity className="py-2 px-4 justify-center items-center bg-orange-500 rounded-md mt-4">
-          <Text className="text-white text-center font-medium text-base">
-            Facebook
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <Text className="mt-8 text-base">
-        Don't have an account?{' '}
-        <Text className="text-orange-500 font-semibold">Sign Up</Text>{' '}
-      </Text>
-    </View>
+      <LoginButtons handleLogin={handleLogin} />
+    </KeyboardAwareScrollView>
   );
 }
