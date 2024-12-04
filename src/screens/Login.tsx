@@ -33,11 +33,9 @@ export default function Login() {
       return;
     }
     const isCorrectUserName = users.find(u => u.Username === username);
-    console.log('isCorrectUserName', isCorrectUserName);
     const isValidUser = users.find(
       u => u.Username === username && u.Password === password,
     );
-    console.log(isValidUser);
     if (!isCorrectUserName) {
       ToastAndroid.show('User does not exist', ToastAndroid.SHORT);
       return;

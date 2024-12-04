@@ -6,3 +6,13 @@ export type SpecialFoodItemRequestType = {
   skip: number;
   limit: number;
 };
+
+
+export type AllFoodItemRequestType = {
+  recipes: FoodItemType[];
+  total: number;
+  skip: number;
+  limit: number;
+  nextCursor: number;
+  prevCursor: number | undefined;
+};

@@ -9,7 +9,22 @@ import {useFood} from '../hooks/useFood';
 import colors from 'tailwindcss/colors';
 
 export default function Search() {
-  const {data, isLoading, error} = useFood();
+  const {
+    isLoading,
+    infiniteData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    error,
+  } = useFood();
+
+  const recipeData = infiniteData?.pages.flatMap(page => page.recipes);
+
+  const handleEndReached = () => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  };
 
   if (isLoading) {
     return (
@@ -32,10 +47,12 @@ export default function Search() {
       <Header />
       <View className="flex-1 w-full px-6 bg-neutral-200 pt-6">
         <FlashList
-          data={data?.recipes}
+          data={recipeData}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={() => <View className="h-4" />}
           estimatedItemSize={100}
+          onEndReachedThreshold={0.5}
+          onEndReached={handleEndReached}
           renderItem={({item}: {item: FoodItemType}) => (
             <FoodCard
               id={item.id}
@@ -45,6 +62,13 @@ export default function Search() {
               caloriesPerServing={item.caloriesPerServing}
             />
           )}
+          ListFooterComponent={() =>
+            isFetchingNextPage ? (
+              <View className="py-4">
+                <ActivityIndicator />
+              </View>
+            ) : null
+          }
         />
       </View>
     </View>
