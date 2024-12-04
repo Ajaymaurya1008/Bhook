@@ -74,9 +74,9 @@ export default function Home() {
           ItemSeparatorComponent={() => <View className="w-4" />}
           horizontal={true}
           estimatedItemSize={200}
+          keyExtractor={item => item.id.toString()}
           renderItem={({item}: {item: FoodItemType}) => (
             <SpecialCard
-              key={item.id}
               id={item.id}
               name={item.name}
               image={item.image}

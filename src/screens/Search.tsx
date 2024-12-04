@@ -53,6 +53,7 @@ export default function Search() {
           estimatedItemSize={100}
           onEndReachedThreshold={0.5}
           onEndReached={handleEndReached}
+          keyExtractor={item => item.id.toString()}
           renderItem={({item}: {item: FoodItemType}) => (
             <FoodCard
               id={item.id}

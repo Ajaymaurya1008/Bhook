@@ -4,9 +4,9 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { FoodItemType } from '@/types/Recipe';
 
 export default function SpecialCard(props: FoodItemType) {
-  const {id, name, image, ingredients, caloriesPerServing, rating} = props;
+  const {name, image, ingredients, caloriesPerServing, rating} = props;
   return (
-    <View key={id} className="bg-white rounded-b-lg w-60 mt-4">
+    <View className="bg-white rounded-b-lg w-60 mt-4">
       <Image
         className="w-60 h-40 rounded-t-lg"
         resizeMethod="scale"
