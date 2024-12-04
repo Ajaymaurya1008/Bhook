@@ -1,58 +1,44 @@
-import {View, Text, TextInput, FlatList, TouchableOpacity} from 'react-native';
+/* eslint-disable react/no-unstable-nested-components */
+import {
+  View,
+  Text,
+  TextInput,
+  ActivityIndicator,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import axios from 'axios';
-import {useQuery} from '@tanstack/react-query';
-
-const foodCategories = [
-  {
-    id: 1,
-    name: 'Lunch',
-    icon: 'pizza-outline',
-  },
-  {
-    id: 2,
-    name: 'Dinner',
-    icon: 'fast-food-outline',
-  },
-  {
-    id: 3,
-    name: 'Breakfast',
-    icon: 'cafe-outline',
-  },
-  {
-    id: 4,
-    name: 'Snacks',
-    icon: 'nutrition-outline',
-  },
-  {
-    id: 5,
-    name: 'Dessert',
-    icon: 'ice-cream-outline',
-  },
-  {
-    id: 6,
-    name: 'Drinks',
-    icon: 'beer-outline',
-  },
-];
+import FoodCategory from '../components/FoodCategory';
+import SpecialCard from '../components/SpecialCard';
+import colors from 'tailwindcss/colors';
+import {FlashList} from '@shopify/flash-list';
+import {FoodItemType} from '../types/Recipe';
+import {useSpecialFood} from '../hooks/useSpecialFood';
 
 export default function Home() {
-  const getRecipes = async () => {
-    const res = await axios.get('https://dummyjson.com/recipes');
-    return res.data;
-  };
+  const {data, isLoading, error} = useSpecialFood();
 
-  const {data} = useQuery({
-    queryKey: ['RECIPES'],
-    queryFn: getRecipes,
-  });
+  if (isLoading) {
+    return (
+      <View className="flex-1 bg-white justify-center items-center">
+        <ActivityIndicator size="large" color={colors.orange[500]} />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View className="flex-1 bg-white justify-center items-center">
+        <Text>Error loading data, please try again later</Text>
+      </View>
+    );
+  }
 
   console.log(data);
 
   return (
-    <View className="flex-1 bg-neutral-100 px-6 pt-16">
+    <ScrollView contentContainerClassName="bg-neutral-100 px-6 pt-16 pb-40">
       <Text className="text-4xl font-bold">Hello {'\n'}Abhishek</Text>
       <Text className="text-xl text-neutral-600 mt-2 font-normal">
         What do you want to eat ?
@@ -64,28 +50,37 @@ export default function Home() {
           className="flex-1 placeholder:text-lg placeholder:font-semibold placeholder:text-neutral-500"
         />
       </View>
-      <FlatList
-        className="mt-8 border"
-        data={foodCategories}
-        horizontal={true}
-        keyExtractor={item => item.id.toString()}
-        ItemSeparatorComponent={Separator}
-        renderItem={({item}) => (
-          <View className="border">
-            <TouchableOpacity
-              key={item.id}
-              className="size-20 justify-center rounded-lg bg-orange-500 items-center">
-              <Ionicons size={50} name={item.icon} color="white" />
-            </TouchableOpacity>
-            <Text className="text-center   border font-medium mt-1 ">{item.name}</Text>
-          </View>
-        )}
-      />
-      <View className="mt-6">
-        <Text>Today's Special</Text>
+      <FoodCategory />
+      <View className="mt-8">
+        <View className="w-full flex-row items-center">
+          <Text className="text-3xl flex-1 font-bold">Today's Special</Text>
+          <TouchableOpacity>
+            <Text className="text-lg font-semibold text-orange-500">
+              See All
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+      <View>
+        <FlashList
+          data={data?.recipes}
+          showsHorizontalScrollIndicator={false}
+          ItemSeparatorComponent={() => <View className="w-4" />}
+          horizontal={true}
+          estimatedItemSize={10}
+          renderItem={({item}: {item: FoodItemType}) => (
+            <SpecialCard
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              image={item.image}
+              ingredients={item.ingredients}
+              caloriesPerServing={item.caloriesPerServing}
+              rating={item.rating}
+            />
+          )}
+        />
+      </View>
+    </ScrollView>
   );
 }
-
-const Separator = () => <View className="w-4" />;
