@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/native';
 
 type RootStackParamList = {
-  TabNavigator: undefined;
+  TabNavigator:undefined;
   Home: undefined;
   Login: undefined;
   Profile: undefined;

@@ -10,7 +10,7 @@ export default function Header() {
         <Feather name="search" size={20} color="gray" />
         <TextInput
           placeholder="Search Food"
-          className="flex-1 placeholder:text-lg placeholder:font-medium placeholder:text-neutral-600"
+          className="flex-1 text-black placeholder:text-lg placeholder:font-medium placeholder:text-neutral-600"
         />
       </View>
     </View>

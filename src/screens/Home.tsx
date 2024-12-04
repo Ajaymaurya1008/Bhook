@@ -15,9 +15,11 @@ import {FlashList} from '@shopify/flash-list';
 import {FoodItemType} from '../types/Recipe';
 import {useSpecialFood} from '../hooks/useSpecialFood';
 import {navigate} from '../navigation/NavigationService';
+import {useAuthStore} from '../store/authStore/store';
 
 export default function Home() {
   const {data, isLoading, error} = useSpecialFood();
+  const {sessionToken: name} = useAuthStore();
 
   if (isLoading) {
     return (
@@ -40,12 +42,17 @@ export default function Home() {
   };
 
   return (
-    <ScrollView contentContainerClassName="bg-neutral-100 px-6 pt-16 pb-40">
-      <Text className="text-4xl font-bold">Hello {'\n'}Abhishek</Text>
+    <ScrollView contentContainerClassName="bg-neutral-100 px-6 pt-16 pb-20">
+      <Text className="text-4xl font-bold">
+        Hello {'\n'}
+        {name || 'User'}
+      </Text>
       <Text className="text-xl text-neutral-600 mt-2 font-normal">
         What do you want to eat ?
       </Text>
-      <TouchableOpacity onPress={handleTotal} className="mt-8 px-4 py-2 gap-1 bg-neutral-300 items-center rounded-lg flex-row">
+      <TouchableOpacity
+        onPress={handleTotal}
+        className="mt-8 px-4 py-2 gap-1 bg-neutral-300 items-center rounded-lg flex-row">
         <Feather name="search" size={20} color="gray" />
         <Text className="text-lg font-semibold text-neutral-500">Search</Text>
       </TouchableOpacity>
