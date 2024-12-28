@@ -3,6 +3,25 @@
 ## Overview
 Bhook is a modern food delivery application built with React Native, offering a seamless experience for browsing and ordering food items. The app features a clean UI with bottom tab navigation, authentication system, and infinite scroll functionality.
 
+## Media 
+
+<div style="display: flex; justify-content: space-between;">
+   <img src="https://github.com/user-attachments/assets/32859ff8-b276-4b44-9e72-91af74b8b96d" alt="Login" width="32%" />
+   <img src="https://github.com/user-attachments/assets/6c01eb44-86f3-47ea-a206-6ff99923bdf9" alt="Home" width="32%" />
+   <img src="https://github.com/user-attachments/assets/8a8b6b3a-831a-44ff-939e-2cb40e73b14a" alt="Search" width="32%" />
+</div>
+
+https://github.com/user-attachments/assets/9c454872-20c6-4ec2-b5a3-d94d0df3a75e
+
+## Username and password for login
+
+| Username        | First Name | Password    |
+|-----------------|------------|-------------|
+| Ajaymaurya1008  | Ajay       | 12345678    |
+| JohnDoe         | John       | password123 |
+| JaneSmith       | Jane       | qwerty456   |
+| AliceJohnson    | Alice      | alice789    |
+
 ## Features
 
 - **Authentication System**
