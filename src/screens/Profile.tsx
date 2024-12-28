@@ -1,14 +1,14 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {useAuthStore} from '../store/authStore/store';
-import {navigate} from '../navigation/NavigationService';
+import NavigationService from '../navigation/NavigationService';
 
 export default function Profile() {
-  const {reset} = useAuthStore();
+  const {reset: resetAuth} = useAuthStore();
 
   const handleLogout = () => {
-    reset();
-    navigate('Login');
+    resetAuth();
+    NavigationService.reset('Login');
   };
 
   return (
